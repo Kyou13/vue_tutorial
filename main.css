@@ -1,0 +1,28 @@
+img {
+  opacity: 1;
+  transition: opacity 1s;
+}
+img.hide {
+  opacity: 0;
+}
+.demo-enter-active, .demo-leave-active {
+transition: opacity 1s, transform 1s;
+}
+.demo-enter{
+  opacity: 0;
+  transform: translateX(-10px);
+}
+.demo-leave-to{
+  opacity: 0;
+  transform: translateY(10px);
+}
+.v-leave-active, .v-enter-active {
+transition: opacity 1s, transform 1s;
+  position: absolute;
+}
+.v-enter, .v-leave-to {
+  opacity: 0;
+}
+.v-move {
+  transition: transform 1s;
+}

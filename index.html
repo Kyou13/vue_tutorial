@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf=8">
+  <title>Vue.js App</title>
+  <link href="./main.css" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <p>Hello {{ message.value }}</p>
+    <p>{{ count }}回クリックした</p>
+    <button v-on:click="increment">増やす</button>
+    <input type="text" v-bind:value="message.value">
+    <p v-bind:class="{child: isChild, 'is-active': isActive}">クラスとスタイルのデータバインディング</p>
+    <p v-bind:class="classObject">オブジェクトデータも渡せるよ</p>
+    <p v-bind="item">オブジェクトデータも渡せるよ</p>
+    <p v-if="ok">ifぶん</p>
+    <ul>
+      <li v-for="(index, item) in list" v-bind:key="item.id" >
+        {{ item.id }} {{ item.name }}
+          <span v-if="item.id >= 1" v-bind:style="{color: item.color}">
+            いいね~
+          </span>
+        <button v-on:click="doRemove(index)">削除</button>
+      </li>
+    </ul>
+    <button v-on:click="incrementlist">増やす</button>
+    <button v-on:click="doFilter">フィルター</button>
+    <button v-on:click="count++">カウントUP</button>
+    <button v-on:click="warn(deng, $event)">
+      Submit
+    </button>
+    <!-- <img src="img/load&#45;icon&#45;png&#45;4.png" v&#45;on:load="show=true" v&#45;bind:class="{hide: !show}"> -->
+    <input v-bind:value="message.value" v-on:input="handleInput">
+    <input v-model="message.value">
+    <div v-on:click="handler">example</div>
+    <!-- <div v&#45;on:click="handler($event)">example</div> -->
+    <div v-on:click.right.prevent="handler">example</div>
+    <div v-on:click.self="handler('div1')">
+      div1
+      <div v-on:click="handler('div2')">
+        div2
+      </div>
+    </div>
+    <label>checkbox:<input type="checkbox" v-model="cval">{{ cval }}</label></br>
+    <label>radio:<input type="radio" v-model="rval" value="A">A {{ rval }}</label></br>
+    <select multiple v-model="sval">
+      <option value="a">A</option> <option value="b">B</option> <option value="c">C</option> </select>
+    <p>{{ sval }}</p>
+    {{ methodHalfWidth() }}
+    <input v-model.number="width"> {{ width }}
+    <input v-model.number="halfWidth"> {{ halfWidth }}</br>
+    <input v-model.number="budget"> 円以下に絞り込む
+    <input v-model.number="limit"> 件を表示
+    <p>{{ matched.length }} 件中 {{ limited.length }} 件表示</p>
+    <ul>
+      <li v-for="item in limited" v-bind:key="item.id">
+        {{ item.name }} {{ item.price }} 円
+      </li>
+    </ul>
+<!-- Sec17 -->
+    <input v-model="watchTest" value="old">{{ oldVal }}{{ newVal }}
+<!-- Sec18 -->
+  {{ price | localNum }}
+  {{ price | localPlus | localPlus }}
+<!-- Sec19  TODO -->
+    <!-- <button v&#45;on:click="video1=true">再生</button> -->
+    <!-- <button v&#45;on:click="video1=false">停止</button> -->
+    <!-- <video src="./video1.mp4" v&#45;video="video1"></video> -->
+    <my-component></my-component>
+    <my-component2></my-component2>
+    <comp-child v-bind:val="message.value"></comp-child>
+    <idclass-marge-child id="parent" class="parent"></idclass-marge-child>
+    <ul>
+      <for-child v-for="item in list" v-bind:id="item.id" v-bind:name="item.name" v-bind:price="item.price">
+    </ul>
+    <child-event v-on:childs-event="parentsMethod"></child-event>
+    <ul>
+      <child-attack v-for="item in list" v-bind:key="item.id" v-bind:id="item.id" v-bind:name="item.name" v-bind:price="item.price" v-on:attack="handleAttack"></child-attack>
+    </ul>
+    <slot-child>
+      <div slot='header'>HELLO</div>
+    </slot-child>
+    <my-calendar inline-template>
+      <p>テンプレート{{ message }}</p>
+    </my-calendar>
+    <button v-on:click="show=!show">切り替え</button>
+    <transition name="demo">
+      <div v-if="show">トランジションさせたい要素</div>
+    </transition>
+    <transition mode="out-in">
+      <div v-if="show" key="a">TRUE</div>
+      <div v-else key="b">FALSE</div>
+    </transition>
+    <button v-on:click="count++">切り替え</button>
+    <transition>
+      <my-label v-bind:count="count" v-bind:key="count"></my-label>
+    </transition>
+    <button v-on:click="order=!order">切り替え</button>
+    <button v-on:click="doFilterTransition">フィルター</button>
+    <transition-group tag="ul" class="list">
+      <li v-for="item in sortedList" v-bind:key="item.id" v-if="item.show">
+        {{ item.name }} {{item.price }}円
+      </li>
+    </transition-group>
+    <transition v-on:enter="enter" v-on:after-enter="afterEnter">
+      <div v-if="show">example</div>
+    </transition>
+  </div>
+
+  <!-- <script type="text/javascript" src="./node_modules/vue/dist/vue.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script> <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.5/lodash.min.js"></script>
+  <script src="main.js"></script>
+
+</body>
+</html>
