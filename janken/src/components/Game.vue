@@ -88,6 +88,7 @@
         this.stop()
         this.judgeGame(+clickedBtn.value, this.srcNum)// 文字列->数値
         this.pushScore({ msg: this.resultMessage })
+        // ボタンを無効化
         this.changeToNoActiveBtn()
         clickedBtn.classList.add('selectedBtn')
       },
@@ -96,51 +97,53 @@
           case val:
             this.resultMessage = '正解!';
             this.miss = false;
-            break
+            break;
+
           default:
             this.resultMessage = '残念..';
             this.resultDesc = this.name[_srcNum];
             this.miss = true;
-            break
+            break;
         }
-      }
-    },
-    changeToNoActiveBtn () {
-      const btns = document.querySelectorAll(`.btn`)
-      for (let btn of btns) {
-        btn.setAttribute('disabled', true)
+      },
+      changeToNoActiveBtn () {
+        // elementをリストで取得
+        const btns = document.querySelectorAll(`.btn`)
+        for (let btn of btns) {
+          btn.setAttribute('disabled', true)
+        }
       }
     }
   }
 </script>
 
 <style scoped>
-.btnWrapper {
-  display: flex;
-  justify-content: center;
-}
-.btnWrapper > li + li {
-  margin-left: 24px;
-}
-.imgArea {
-  position: relative;
-  width: 300px;
-  height: 300px;
-  text-align: center;
-  margin: 0 auto;
-}
-.imgArea img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 200px;
-  height: 210px;
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
+  .btnWrapper {
+    display: flex;
+    justify-content: center;
+  }
+  .btnWrapper > li + li {
+    margin-left: 24px;
+  }
+  .imgArea {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    text-align: center;
+    margin: 0 auto;
+  }
+  .imgArea img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 210px;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
   .logo img{
     width: 20px;
     position: absolute;

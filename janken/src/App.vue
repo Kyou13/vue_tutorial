@@ -35,7 +35,7 @@ export default {
     }
   },
   components: {
-    Head,
+    'Head': Head,
     Janken,
     Scores
   }
